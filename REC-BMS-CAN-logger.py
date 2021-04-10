@@ -134,6 +134,8 @@ try:
 		print('\r {} '.format(c))
 		#print(c, file=outfile) # Save data to file
 		count += 1
+		if count % 10 == 0:
+			print('\r {} '.format(headers))
 			
 
  
