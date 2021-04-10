@@ -93,7 +93,7 @@ c = ''
 count = 0
 
 headers = '| {0:27s} | {1:3s} '.format('Time Stamp', 'cnt')
-headers += '| {0:3s} | {1:3s} | {2:3s} | {3:3s} | {4:3s} | {5:3s} | {6:3s} | {7:3s} | {8:3s} | {9:3s} | {10:3s} | {11:3s} | {12:3s} | {13:3s} |'.format('CVL', 'CCL', 'DCL', 'DVL', 'SOC', 'SOH', 'SOC', 'BaV', 'BaC', 'BaT', 'MiV', 'MaV', 'MiT', 'MaT')
+headers += '| {0:4s} | {1:4s} | {2:3s} | {3:3s} | {4:3s} | {5:3s} | {6:3s} | {7:3s} | {8:3s} | {9:3s} | {10:3s} | {11:3s} | {12:3s} | {13:3s} |'.format('CVL', 'CCL', 'DCL', 'DVL', 'SOC', 'SOH', 'SOC', 'BaV', 'BaC', 'BaT', 'MiV', 'MaV', 'MiT', 'MaT')
 print('\r {} '.format(headers))
 # Main loop
 try:
