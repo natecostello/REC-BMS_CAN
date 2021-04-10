@@ -98,8 +98,9 @@ try:
 			while(q.empty() == True):	# Wait until there is a message
 				pass
 			message = q.get()
+			ts = datetime.datetime.fromtimestamp(message.timestamp).strftime('%Y-%m-%d %H:%M:%S.%f')
 
-			c = '| {0:f} | {1:3d}'.format(message.timestamp,count)
+			c = '| {0:27s} | {1:3d}'.format(ts,count)
 
 
 			if message.arbitration_id == CHARGE_DISCHARGE_LIMITS_ID:
