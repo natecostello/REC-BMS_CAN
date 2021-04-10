@@ -132,6 +132,8 @@ try:
 		#c += '{0:.1f},{1:.1f},{2:.1f},{3:.1f},{4:.0f},{5:.0f},{6:.2f},{7:.2f},{8:.1f},{9:.1f},{10:.3f},{11:.3f},{12:.0f},{13:.0f}'.format(charge_voltage_limit, charge_current_limit, discharge_current_limit, discharge_voltage_limit, state_of_charge, state_of_health, state_of_charge_hi_res, battery_voltage, battery_current, battery_temperature, min_cell_voltage, max_cell_voltage, min_temperature, max_temperature)
 		c += '| {0: >4.1f} | {1: >5.1f} | {2: >5.1f} | {3: >4.1f} | {4: >3d} | {5:0>3d} | {6: >6.2f} | {7: >5.2f} | {8: >5.1f} | {9: >4.1f} | {10: >5.3f} | {11: >5.3f} | {12: >3.0f} | {13: >3.0f} |'.format(charge_voltage_limit, charge_current_limit, discharge_current_limit, discharge_voltage_limit, state_of_charge, state_of_health, state_of_charge_hi_res, battery_voltage, battery_current, battery_temperature, min_cell_voltage, max_cell_voltage, min_temperature, max_temperature)
 		print('\r {} '.format(c))
+		print('\r {} '.format(headers), end="\r")
+			
 		#print(c, file=outfile) # Save data to file
 		count += 1
 		if count % 10 == 0:
