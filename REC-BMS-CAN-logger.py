@@ -93,7 +93,7 @@ c = ''
 count = 0
 
 headers = '| {0:27s} | {1:3s} '.format('Time Stamp', 'cnt')
-headers += '| {0:4s} | {1:4s} | {2:5s} | {3:4s} | {4:3s} | {5:3s} | {6:4s} | {7:5s} | {8:3s} | {9:4s} | {10:5s} | {11:5s} | {12:3s} | {13:3s} |'.format('CVL', 'CCL', 'DCL', 'DVL', 'SOC', 'SOH', 'SOC', 'BaV', 'BaC', 'BaT', 'MiV', 'MaV', 'MiT', 'MaT')
+headers += '| {0:4s} | {1:5s} | {2:5s} | {3:4s} | {4:3s} | {5:3s} | {6:4s} | {7:5s} | {8:3s} | {9:4s} | {10:5s} | {11:5s} | {12:3s} | {13:3s} |'.format('CVL', 'CCL', 'DCL', 'DVL', 'SOC', 'SOH', 'SOC', 'BaV', 'BaC', 'BaT', 'MiV', 'MaV', 'MiT', 'MaT')
 print('\r {} '.format(headers))
 # Main loop
 try:
@@ -130,7 +130,7 @@ try:
 				max_temperature = int.from_bytes(message.data[6:8], 'little')
 
 		#c += '{0:.1f},{1:.1f},{2:.1f},{3:.1f},{4:.0f},{5:.0f},{6:.2f},{7:.2f},{8:.1f},{9:.1f},{10:.3f},{11:.3f},{12:.0f},{13:.0f}'.format(charge_voltage_limit, charge_current_limit, discharge_current_limit, discharge_voltage_limit, state_of_charge, state_of_health, state_of_charge_hi_res, battery_voltage, battery_current, battery_temperature, min_cell_voltage, max_cell_voltage, min_temperature, max_temperature)
-		c += '| {0: >4.1f} | {1: >5.1f} | {2: >5.1f} | {3: >4.1f} | {4: >3d} | {5:0>3d} | {6:.2f} | {7:.2f} | {8:.1f} | {9:.1f} | {10:.3f} | {11:.3f} | {12:.0f} | {13:.0f} |'.format(charge_voltage_limit, charge_current_limit, discharge_current_limit, discharge_voltage_limit, state_of_charge, state_of_health, state_of_charge_hi_res, battery_voltage, battery_current, battery_temperature, min_cell_voltage, max_cell_voltage, min_temperature, max_temperature)
+		c += '| {0: >4.1f} | {1: >5.1f} | {2: >5.1f} | {3: >4.1f} | {4: >3d} | {5:0>3d} | {6: >6.2f} | {7: >5.2f} | {8: >5.1f} | {9: >4.1f} | {10: >5.3f} | {11: >5.3f} | {12: >3.0f} | {13: >3.0f} |'.format(charge_voltage_limit, charge_current_limit, discharge_current_limit, discharge_voltage_limit, state_of_charge, state_of_health, state_of_charge_hi_res, battery_voltage, battery_current, battery_temperature, min_cell_voltage, max_cell_voltage, min_temperature, max_temperature)
 		print('\r {} '.format(c))
 		#print(c, file=outfile) # Save data to file
 		count += 1
