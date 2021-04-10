@@ -124,7 +124,7 @@ try:
 				min_temperature = int.from_bytes(message.data[4:6], 'little')
 				max_temperature = int.from_bytes(message.data[6:8], 'little')
 
-		c += '{0:f},{1:f},{2:f},{3:f},{4:f},{5:f},{6:f},{7:f},{8:f},{9:f},{10:f},{11:f},{12:f},{13:f}'.format(charge_voltage_limit, charge_current_limit, discharge_current_limit, discharge_voltage_limit, state_of_charge, state_of_health, state_of_charge_hi_res, battery_voltage, battery_current, battery_temperature, min_cell_voltage, max_cell_voltage, min_temperature, max_temperature)
+		c += '{0:f},{1:0f},{2:.2f},{3:.2f},{4:.2f},{5:f},{6:f},{7:f},{8:f},{9:f},{10:f},{11:f},{12:f},{13:f}'.format(charge_voltage_limit, charge_current_limit, discharge_current_limit, discharge_voltage_limit, state_of_charge, state_of_health, state_of_charge_hi_res, battery_voltage, battery_current, battery_temperature, min_cell_voltage, max_cell_voltage, min_temperature, max_temperature)
 		print('\r {} '.format(c))
 		#print(c, file=outfile) # Save data to file
 		count += 1
