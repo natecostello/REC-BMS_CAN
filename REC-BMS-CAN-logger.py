@@ -13,6 +13,7 @@
 
 import can
 import time
+import datetime
 import os
 import queue
 from threading import Thread
