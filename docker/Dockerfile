@@ -4,11 +4,13 @@ FROM python:3.10.0a7-buster
 
 #WORKDIR /usr/src/app
 
+# can-utils is required by python-can
+# sudo is needed because it is used in code for running on rPi
 RUN apt-get update && apt-get install -y \
  can-utils\
  sudo
 
-RUN useradd -m nonrootuser
+#RUN useradd -m nonrootuser
 
 
 #COPY requirements.txt ./
@@ -18,6 +20,6 @@ RUN pip install python-can
 
 #COPY . .
 
-USER nonrootuser
+#USER nonrootuser
 #CMD ["python", "./REC-BMS-CAN-logger.py"]
 CMD ["bash"]
