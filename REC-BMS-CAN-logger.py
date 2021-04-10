@@ -105,26 +105,26 @@ try:
 
 
 			if message.arbitration_id == CHARGE_DISCHARGE_LIMITS_ID:
-				charge_voltage_limit = 0.1 * int.from_bytes(message[0:2], 'little')
-				charge_current_limit = 0.1 * int.from_bytes(message[2:4], 'little')
-				discharge_current_limit = 0.1 * int.from_bytes(message[4:6], 'little')
-				discharge_voltage_limit = 0.1 * int.from_bytes(message[6:8], 'little')
+				charge_voltage_limit = 0.1 * int.from_bytes(message.data[0:2], 'little')
+				charge_current_limit = 0.1 * int.from_bytes(message.data[2:4], 'little')
+				discharge_current_limit = 0.1 * int.from_bytes(message.data[4:6], 'little')
+				discharge_voltage_limit = 0.1 * int.from_bytes(message.data[6:8], 'little')
 
 			if message.arbitration_id == SOC_SOH_ID:
-				state_of_charge = int.from_bytes(message[0:2], 'little')
-				state_of_health = int.from_bytes(message[2:4], 'little')
-				state_of_charge_hi_res = 0.01 * int.from_bytes(message[4:6], 'little')
+				state_of_charge = int.from_bytes(message.data[0:2], 'little')
+				state_of_health = int.from_bytes(message.data[2:4], 'little')
+				state_of_charge_hi_res = 0.01 * int.from_bytes(message.data[4:6], 'little')
 					
 			if message.arbitration_id == BATTERY_VOLT_CURRENT_TEMP_ID:
-				battery_voltage = 0.01 * int.from_bytes(message[0:2], 'little')
-				battery_current = 0.1 * int.from_bytes(message[2:4], 'little')
-				battery_temperature = 0.1 * int.from_bytes(message[4:6], 'little')
+				battery_voltage = 0.01 * int.from_bytes(message.data[0:2], 'little')
+				battery_current = 0.1 * int.from_bytes(message.data[2:4], 'little')
+				battery_temperature = 0.1 * int.from_bytes(message.data[4:6], 'little')
 
 			if message.arbitration_id == MIN_MAX_CELL_VOLT_TEMP_ID:
-				min_cell_voltage = 0.001 * int.from_bytes(message[0:2], 'little')
-				max_cell_voltage = 0.001 * int.from_bytes(message[2:4], 'little')
-				min_temperature = int.from_bytes(message[4:6], 'little')
-				max_temperature = int.from_bytes(message[6:8], 'little')
+				min_cell_voltage = 0.001 * int.from_bytes(message.data[0:2], 'little')
+				max_cell_voltage = 0.001 * int.from_bytes(message.data[2:4], 'little')
+				min_temperature = int.from_bytes(message.data[4:6], 'little')
+				max_temperature = int.from_bytes(message.data[6:8], 'little')
 
 		c += '{0:d},{1:d},{2:d},{3:d},{4:d},{5:d},{6:d},{7:d},{8:d},{9:d},{10:d},{11:d},{12:d},{13:d}'.format(charge_voltage_limit, charge_current_limit, discharge_current_limit, discharge_voltage_limit, state_of_charge, state_of_health, state_of_charge_hi_res, battery_voltage, battery_current, battery_temperature, min_cell_voltage, max_cell_voltage, min_temperature, max_temperature)
 		print('\r {} '.format(c))
