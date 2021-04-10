@@ -92,6 +92,9 @@ max_temperature = 0
 c = ''
 count = 0
 
+headers = '| {0:27s} | {1:3s} '.format('Time Stamp', 'cnt')
+headers += '| {0:3s} | {1:3s} | {2:3s} | {3:3s} | {4:3s} | {5:3s} | {6:3s} | {7:3s} | {8:3s} | {9:3s} | {10:3s} | {11:3s} | {12:3s} | {13:3s} |'.format('CVL', 'CCL', 'DCL', 'DVL', 'SOC', 'SOH', 'SOC', 'BaV', 'BaC', 'BaT', 'MiV', 'MaV', 'MiT', 'MaT')
+print('\r {} '.format(headers))
 # Main loop
 try:
 	while True:
@@ -101,7 +104,7 @@ try:
 			message = q.get()
 			ts = datetime.datetime.fromtimestamp(message.timestamp).strftime('%Y-%m-%d %H:%M:%S.%f')
 
-			c = '| {0:27s} | {1:3d}'.format(ts,count)
+			c = '| {0:27s} | {1:3d} '.format(ts,count)
 
 
 			if message.arbitration_id == CHARGE_DISCHARGE_LIMITS_ID:
@@ -127,7 +130,7 @@ try:
 				max_temperature = int.from_bytes(message.data[6:8], 'little')
 
 		#c += '{0:.1f},{1:.1f},{2:.1f},{3:.1f},{4:.0f},{5:.0f},{6:.2f},{7:.2f},{8:.1f},{9:.1f},{10:.3f},{11:.3f},{12:.0f},{13:.0f}'.format(charge_voltage_limit, charge_current_limit, discharge_current_limit, discharge_voltage_limit, state_of_charge, state_of_health, state_of_charge_hi_res, battery_voltage, battery_current, battery_temperature, min_cell_voltage, max_cell_voltage, min_temperature, max_temperature)
-		c += '| {0:.1f} | {1:.1f} | {2:.1f} | {3:.1f} | {4:.0f} | {5:.0f} | {6:.2f} | {7:.2f} | {8:.1f} | {9:.1f} | {10:.3f} | {11:.3f} | {12:.0f} | {13:.0f} |'.format(charge_voltage_limit, charge_current_limit, discharge_current_limit, discharge_voltage_limit, state_of_charge, state_of_health, state_of_charge_hi_res, battery_voltage, battery_current, battery_temperature, min_cell_voltage, max_cell_voltage, min_temperature, max_temperature)
+		c += '| {0:.1f} | {1:.1f} | {2:.1f} | {3:0>3d} | {4:0>3d} | {5:.0f} | {6:.2f} | {7:.2f} | {8:.1f} | {9:.1f} | {10:.3f} | {11:.3f} | {12:.0f} | {13:.0f} |'.format(charge_voltage_limit, charge_current_limit, discharge_current_limit, discharge_voltage_limit, state_of_charge, state_of_health, state_of_charge_hi_res, battery_voltage, battery_current, battery_temperature, min_cell_voltage, max_cell_voltage, min_temperature, max_temperature)
 		print('\r {} '.format(c))
 		#print(c, file=outfile) # Save data to file
 		count += 1
