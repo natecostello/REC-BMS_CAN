@@ -129,7 +129,7 @@ try:
 
 		c += '{0:d},{1:d},{2:d},{3:d},{4:d},{5:d},{6:d},{7:d},{8:d},{9:d},{10:d},{11:d},{12:d},{13:d}'.format(charge_voltage_limit, charge_current_limit, discharge_current_limit, discharge_voltage_limit, state_of_charge, state_of_health, state_of_charge_hi_res, battery_voltage, battery_current, battery_temperature, min_cell_voltage, max_cell_voltage, min_temperature, max_temperature)
 		print('\r {} '.format(c))
-		print(c,file = outfile) # Save data to file
+		print(c, file=outfile) # Save data to file
 		count += 1
 			
 
