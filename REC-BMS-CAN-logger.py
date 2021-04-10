@@ -65,8 +65,7 @@ except OSError:
 def can_rx_task():	# Receive thread
 	while True:
 		message = bus.recv()
-		if message.arbitration_id == PID_REPLY:
-			q.put(message)			# Put message into queue
+		q.put(message)			# Put message into queue
 						
 						
 q = queue.Queue()
