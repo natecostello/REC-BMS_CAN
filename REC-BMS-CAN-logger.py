@@ -99,7 +99,7 @@ try:
 				pass
 			message = q.get()
 
-			c = '{0:f},{1:d},'.format(message.timestamp,count)
+			c = '| {0:f} | {1:3d}'.format(message.timestamp,count)
 
 
 			if message.arbitration_id == CHARGE_DISCHARGE_LIMITS_ID:
