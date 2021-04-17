@@ -34,16 +34,6 @@ MIN_MAX_CELL_VOLT_TEMP_ID		= 0x373
 # Unknown						= 0x379
 # Unknown						= 0x380
 
-
-ENGINE_RPM          = 0x0C
-VEHICLE_SPEED       = 0x0D
-MAF_SENSOR          = 0x10
-O2_VOLTAGE          = 0x14
-THROTTLE            = 0x11
-
-PID_REQUEST         = 0x7DF
-PID_REPLY           = 0x7E8
-
 outfile = open('log.txt','w')
 
 
