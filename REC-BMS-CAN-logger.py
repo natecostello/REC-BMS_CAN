@@ -25,7 +25,7 @@ MIN_MAX_CELL_VOLT_TEMP_ID		= 0x373
 # Unknown						= 0x375
 # Unknown						= 0x376
 # Unknown						= 0x377
-# Unknown						= 0x379
+RATED_CAPACITY					= 0x379
 # Unknown						= 0x380
 
 outfile = open('log.txt','w')
@@ -73,11 +73,16 @@ max_cell_voltage = 0
 min_temperature = 0
 max_temperature = 0
 
+rated_capacity = 0
+
+remaining_capacity = 0
+
 c = ''
 count = 0
 
 headers = '| {0:27s} | {1:3s} '.format('Time Stamp', 'cnt')
-headers += '| {0:4s} | {1:5s} | {2:5s} | {3:4s} | {4:3s} | {5:3s} | {6:6s} | {7:5s} | {8:5s} | {9:4s} | {10:5s} | {11:5s} | {12:3s} | {13:3s} |'.format('CVL', 'CCL', 'DCL', 'DVL', 'SOC', 'SOH', 'SOC', 'BaV', 'BaC', 'BaT', 'MiV', 'MaV', 'MiT', 'MaT')
+headers += '| {0:4s} | {1:5s} | {2:5s} | {3:4s} | {4:3s} | {5:3s} | {6:6s} | {7:5s} | {8:5s} | {9:4s} | {10:5s} | {11:5s} | {12:3s} | {13:3s} | {14:4s} | {15:4s} |'.format(
+	'CVL', 'CCL', 'DCL', 'DVL', 'SOC', 'SOH', 'SOC', 'BaV', 'BaC', 'BaT', 'MiV', 'MaV', 'MiT', 'MaT', ' CAP', 'RCAP')
 print('\r {} '.format(headers))
 # Main loop
 
@@ -85,6 +90,8 @@ cdl_updated = False
 soc_soh_updated = False
 bvct_updated = False
 min_max_cell_updated = False
+rated_capacity_updated = False
+chem_hwvers_cap_updated = False
 
 try:
 	while True:
@@ -122,8 +129,19 @@ try:
 			max_temperature = int.from_bytes(message.data[6:8], 'little')
 			min_max_cell_updated = True
 
-		if cdl_updated and soc_soh_updated and bvct_updated and min_max_cell_updated:
-			c += '| {0: >4.1f} | {1: >5.1f} | {2: >5.1f} | {3: >4.1f} | {4: >3d} | {5:0>3d} | {6: >6.2f} | {7: >5.2f} | {8: >5.1f} | {9: >4.1f} | {10: >5.3f} | {11: >5.3f} | {12: >3.0f} | {13: >3.0f} |'.format(charge_voltage_limit, charge_current_limit, discharge_current_limit, discharge_voltage_limit, state_of_charge, state_of_health, state_of_charge_hi_res, battery_voltage, battery_current, battery_temperature, min_cell_voltage, max_cell_voltage, min_temperature, max_temperature)
+		if message.arbitration_id == RATED_CAPACITY:
+			rated_capacity = int.from_bytes(message.data[0:2], 'little')
+			if rated_capacity > 250:
+				rated_capacity += 1
+			rated_capacity_updated = True
+		
+		if message.arbitration_id == CHEM_HWVERS_CAPACITY_SWVERS_ID:
+			remaining_capacity = int.from_bytes(message.data[4:6], 'little')
+			chem_hwvers_cap_updated = True
+
+		if cdl_updated and soc_soh_updated and bvct_updated and min_max_cell_updated and rated_capacity_updated:
+			c += '| {0: >4.1f} | {1: >5.1f} | {2: >5.1f} | {3: >4.1f} | {4: >3d} | {5: >3d} | {6: >6.2f} | {7: >5.2f} | {8: >5.1f} | {9: >4.1f} | {10: >5.3f} | {11: >5.3f} | {12: >3.0f} | {13: >3.0f} | {14: >4d} | {15: >4d} |'.format(
+				charge_voltage_limit, charge_current_limit, discharge_current_limit, discharge_voltage_limit, state_of_charge, state_of_health, state_of_charge_hi_res, battery_voltage, battery_current, battery_temperature, min_cell_voltage, max_cell_voltage, min_temperature, max_temperature, rated_capacity, remaining_capacity)
 			print('\r {} '.format(c))
 			print('\r {} '.format(headers), end="\r")
 			count += 1
@@ -131,6 +149,8 @@ try:
 			soc_soh_updated = False
 			bvct_updated = False
 			min_max_cell_updated = False
+			rated_capacity_updated = False
+			chem_hwvers_cap_updated = False
 
 
  
